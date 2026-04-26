@@ -1,0 +1,53 @@
+# Pretraining corpus: one sentence per line
+# Grammar: <team> from <city|state|conference>
+#          <team> wears <color>
+#
+# 4 teams with overlapping attributes:
+#   lakers   -> la / california / west   -> yellow
+#   celtics  -> boston / massachusetts / east -> green
+#   bulls    -> chicago / illinois / east -> red
+#   warriors -> sf / california / west   -> white
+
+# Lakers
+lakers from la
+lakers from california
+lakers from west
+lakers wears yellow
+
+# Celtics
+celtics from boston
+celtics from massachusetts
+celtics from east
+celtics wears green
+
+# Bulls
+bulls from chicago
+bulls from illinois
+bulls from east
+bulls wears red
+
+# Warriors
+warriors from sf
+warriors from california
+warriors from west
+warriors wears white
+
+# Repeat for stronger signal
+lakers from la
+lakers from california
+lakers wears yellow
+celtics from boston
+celtics from massachusetts
+celtics wears green
+bulls from chicago
+bulls from illinois
+bulls wears red
+warriors from sf
+warriors from california
+warriors wears white
+
+# Extra emphasis on shared attributes
+lakers from west
+warriors from west
+celtics from east
+bulls from east

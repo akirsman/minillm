@@ -1,0 +1,13 @@
+# Fine-tuning corpus: chained facts
+# Grammar: <team> from <city|state> wears <color>
+
+lakers from la wears yellow
+celtics from boston wears green
+bulls from chicago wears red
+warriors from sf wears white
+lakers from california wears yellow
+celtics from massachusetts wears green
+bulls from illinois wears red
+warriors from california wears white
+lakers from la wears yellow
+warriors from sf wears white

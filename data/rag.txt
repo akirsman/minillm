@@ -1,0 +1,13 @@
+# RAG knowledge base: one document per line
+# Format: <key> | <document text>
+
+lakers | lakers from la from california from west wears yellow
+celtics | celtics from boston from massachusetts from east wears green
+bulls | bulls from chicago from illinois from east wears red
+warriors | warriors from sf from california from west wears white
+la | lakers from la
+boston | celtics from boston
+chicago | bulls from chicago
+sf | warriors from sf
+california | lakers from california warriors from california
+east | celtics from east bulls from east
