@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MiniLLM — Interactive Transformer Visualizer</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<header>
+  <h1><span>Mini</span>LLM</h1>
+  <span class="badge" id="param-badge">…</span>
+  <span id="arch-info"></span>
+</header>
+
+<div class="main-grid">
+
+  <!-- ═══ LEFT: Chat Panel ═══ -->
+  <div class="chat-panel">
+    <div class="chat-messages" id="messages">
+      <div class="msg system">Pretraining model… please wait.</div>
+    </div>
+
+    <!-- Controls -->
+    <div class="chat-controls">
+      <label class="ctrl-row">
+        <input type="checkbox" id="use-rag"> RAG
+      </label>
+      <label class="ctrl-row" title="Temperature">
+        T=<input type="number" id="temperature" value="0.8"
+                 min="0" max="2" step="0.1" class="num-input">
+      </label>
+      <label class="ctrl-row" title="Max tokens to generate">
+        Len=<input type="number" id="max-tokens" value="10"
+                   min="1" max="14" step="1" class="num-input">
+      </label>
+    </div>
+
+    <!-- System prompt -->
+    <div class="sys-prompt-row">
+      <input type="text" id="system-prompt"
+             placeholder="System prompt (optional)"
+             class="sys-input">
+    </div>
+
+    <!-- Input -->
+    <form class="chat-input" id="chat-form">
+      <input type="text" id="prompt-input"
+             placeholder="Type an NBA prompt…"
+             autocomplete="off" autofocus>
+      <button type="submit" id="send-btn">Send</button>
+    </form>
+  </div>
+
+  <!-- ═══ RIGHT: Visualization Panel ═══ -->
+  <div class="viz-panel">
+    <div class="viz-tabs">
+      <button class="tab active" data-tab="pipeline">Pipeline</button>
+      <button class="tab" data-tab="attention">Attention</button>
+      <button class="tab" data-tab="embeddings">Embeddings</button>
+      <button class="tab" data-tab="vocabulary">Vocabulary</button>
+    </div>
+
+    <div class="viz-content" id="viz-content">
+      <div class="viz-placeholder">
+        Send a message to see the model's internals
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
