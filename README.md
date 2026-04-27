@@ -1,5 +1,7 @@
 # MiniLLM - A Minimal Transformer for Teaching LLM Concepts
 
+![MiniLLM Banner](banner.png)
+
 A tiny but complete transformer-based language model designed to illustrate core LLM concepts to technical audiences. Trainable on a CPU in seconds.
 
 ## Architecture

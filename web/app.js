@@ -1,4 +1,4 @@
-// ── MiniLLM Web UI ───────────────────────────────────────────────────
+// ── MiniLLM Web UI ───────────────────────────────────────────────
 // Single-page app that visualizes transformer internals in real time.
 
 const $ = (sel) => document.querySelector(sel);
@@ -18,7 +18,7 @@ async function init() {
       `d=${modelInfo.d_model}  heads=${modelInfo.n_heads}  ` +
       `layers=${modelInfo.n_layers}  ctx=${modelInfo.max_seq_len}  ` +
       `vocab=${modelInfo.vocab_size}`;
-    addSystemMsg('MiniLLM ready! Try: "lakers", "bulls wears", "celtics from"');
+    addSystemMsg("MiniLLM ready! Try: \"lakers\", \"bulls wears\", \"celtics from\"");
   } catch (e) {
     addSystemMsg("Failed to connect to server.");
   }
@@ -97,7 +97,7 @@ async function sendMessage(prompt) {
   btn.textContent = "Send";
 }
 
-// ── Visualization Router ───────────────────────────────────────
+// ── Visualization Router ─────────────────────────────────────────
 function renderViz(data) {
   const container = $("#viz-content");
   container.innerHTML = "";
@@ -110,7 +110,7 @@ function renderViz(data) {
   }
 }
 
-// ── Pipeline View ────────────────────────────────────────────
+// ── Pipeline View ────────────────────────────────────────────────
 function renderPipeline(el, data) {
   const html = [];
 
@@ -145,7 +145,7 @@ function renderPipeline(el, data) {
       ${ctxBar("pad", ctx.total_slots - ctx.used, ctx.total_slots)}
     </div>
     <div style="display:flex;gap:0.8rem;margin-top:0.3rem;font-size:0.65rem;color:var(--text2)">
-      <span>🟢 Input</span> <span>🟣 Generated</span> <span>⬜ Unused</span>
+      <span>🔵 Input</span> <span>🟣 Generated</span> <span>⬜ Unused</span>
     </div>
   `));
 
@@ -205,7 +205,7 @@ function ctxBar(cls, count, total) {
   return `<div class="ctx-seg ${cls}" style="width:${pct}%">${count}</div>`;
 }
 
-// ── Attention View ───────────────────────────────────────────
+// ── Attention View ───────────────────────────────────────────────
 function renderAttention(el, data) {
   if (!data.attention || !data.attention.length) {
     el.innerHTML = '<div class="viz-placeholder">No attention data</div>';
@@ -279,7 +279,7 @@ function renderAttention(el, data) {
   el.appendChild(grid);
 }
 
-// ── Embeddings View ──────────────────────────────────────────
+// ── Embeddings View ──────────────────────────────────────────────
 function renderEmbeddings(el, data) {
   if (!data.embeddings || !data.embeddings.length) {
     el.innerHTML = '<div class="viz-placeholder">No embedding data</div>';
@@ -377,7 +377,7 @@ function drawEmbeddings(canvas, points) {
   ctx.restore();
 }
 
-// ── Vocabulary View ───────────────────────────────────────────
+// ── Vocabulary View ───────────────────────────────────────────────
 const VOCAB_CATEGORIES = {
   special: { label: "Special", color: "var(--accent)",
     words: new Set(["<pad>", "<unk>", "<bos>", "<eos>", "<sep>"]) },

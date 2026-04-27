@@ -7,7 +7,7 @@ Architecture:
 - 2 attention heads
 - Embedding dim: 32
 - Context window: 16 tokens
-- ~18K parameters total
+- ~25K parameters total
 
 Every component is kept minimal but functionally complete,
 so each piece maps directly to a real LLM concept.
@@ -146,19 +146,27 @@ class MiniLLM(nn.Module):
                 nn.init.xavier_uniform_(p)
 
     def forward(self, idx):
+        """
+        Forward pass.
+        idx: (batch, seq_len) tensor of token IDs
+        Returns: (batch, seq_len, vocab_size) logits
+        """
         B, T = idx.shape
         assert T <= self.max_seq_len, (
             f"Sequence length {T} exceeds max {self.max_seq_len}"
         )
 
+        # Token + positional embeddings
         tok_emb = self.token_emb(idx)
         pos = torch.arange(T, device=idx.device)
         pos_emb = self.pos_emb(pos)
         x = tok_emb + pos_emb
 
+        # Causal mask
         mask = torch.tril(torch.ones(T, T, device=idx.device))
-        mask = mask.unsqueeze(0).unsqueeze(0)
+        mask = mask.unsqueeze(0).unsqueeze(0)  # (1, 1, T, T)
 
+        # Transformer layers
         for layer in self.layers:
             x = layer(x, mask)
 
@@ -170,6 +178,7 @@ class MiniLLM(nn.Module):
         return sum(p.numel() for p in self.parameters())
 
     def get_attention_maps(self) -> list:
+        """Return attention weights from all layers for visualization."""
         maps = []
         for layer in self.layers:
             if layer.attn.last_attn_weights is not None:
@@ -179,9 +188,21 @@ class MiniLLM(nn.Module):
     @torch.no_grad()
     def generate(self, idx, max_new_tokens=10, temperature=1.0,
                  top_k=None, eos_id=None):
+        """
+        Autoregressive generation (how LLMs produce text).
+
+        Args:
+            idx: starting token IDs (batch, seq)
+            max_new_tokens: how many tokens to generate
+            temperature: controls randomness (0=greedy, >1=creative)
+            top_k: if set, only sample from top-k tokens
+            eos_id: stop generation when this token is produced
+        """
         self.eval()
         for _ in range(max_new_tokens):
+            # Crop to context window
             idx_cond = idx[:, -self.max_seq_len:]
+
             logits = self(idx_cond)
             logits = logits[:, -1, :] / max(temperature, 1e-8)
 

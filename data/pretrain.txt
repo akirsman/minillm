@@ -3,10 +3,10 @@
 #          <team> wears <color>
 #
 # 4 teams with overlapping attributes:
-#   lakers   -> la / california / west   -> yellow
-#   celtics  -> boston / massachusetts / east -> green
-#   bulls    -> chicago / illinois / east -> red
-#   warriors -> sf / california / west   -> white
+#   lakers   → la / california / west   → yellow
+#   celtics  → boston / massachusetts / east → green
+#   bulls    → chicago / illinois / east → red
+#   warriors → sf / california / west   → white
 
 # Lakers
 lakers from la
